@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INTUITY - C1/C2 Passive Voice Master</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1d3a 100%);
+      color: white;
+      min-height: 100vh;
+      padding: 1rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 1.25rem 0 1rem;
+      position: relative;
+    }
+
+    .profile-badge {
+      position: absolute;
+      top: 0;
+      right: 1rem;
+      background: rgba(28, 28, 30, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 0.5rem 1rem;
+      border-radius: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid rgba(201, 169, 97, 0.25);
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-badge:hover {
+      background: rgba(28, 28, 30, 0.95);
+      border-color: #C9A961;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(201, 169, 97, 0.2);
+    }
+
+    .xp-display {
+      font-size: 0.75rem;
+      color: #C9A961;
+      font-weight: 600;
+    }
+
+    .header h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #C9A961;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #C9A961 0%, rgba(201, 169, 97, 0.8) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header .subtitle {
+      font-size: 0.8125rem;
+      color: #8e8e93;
+      margin-bottom: 0.375rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .header .author {
+      font-size: 0.6875rem;
+      color: #636366;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .cambridge-badge {
+      display: inline-block;
+      background: rgba(201, 169, 97, 0.15);
+      padding: 0.5rem 1.5rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(201, 169, 97, 0.3);
+      font-size: 0.75rem;
+      color: #C9A961;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 0.5rem;
+    }
+
+    .profile-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(30, 35, 55, 0.8);
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid rgba(107, 142, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .profile-badge:hover {
+      background: rgba(30, 35, 55, 1);
+      border-color: #6B8EFF;
+      transform: translateY(-2px);
+    }
+
+    .achievement-icon {
+      font-size: 1.5rem;
+    }
+
+    .xp-display {
+      font-size: 0.9rem;
+      color: #6B8EFF;
+      font-weight: 700;
+    }
+
+    .mode-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .mode-card {
+      background: rgba(28, 28, 30, 0.85);
+      backdrop-filter: blur(40px) saturate(150%);
+      -webkit-backdrop-filter: blur(40px) saturate(150%);
+      padding: 2rem;
+      border-radius: 1.5rem;
+      border: 1.5px solid rgba(201, 169, 97, 0.25);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .mode-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #C9A961, rgba(201, 169, 97, 0.8));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .mode-card:hover::before {
+      opacity: 1;
+    }
+
+    .mode-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(201, 169, 97, 0.5);
+      box-shadow: 0 12px 40px rgba(201, 169, 97, 0.25),
+                  0 0 0 1px rgba(201, 169, 97, 0.3),
+                  0 4px 16px rgba(0, 0, 0, 0.3);
+      background: rgba(28, 28, 30, 0.95);
+    }
+
+    .mode-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .mode-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #C9A961;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .mode-desc {
+      font-size: 0.9rem;
+      color: #8e8e93;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .mode-stats {
+      display: flex;
+      justify-content: space-around;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(201, 169, 97, 0.2);
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #C9A961;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: #636366;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .game-settings {
+      background: rgba(28, 28, 30, 0.85);
+      backdrop-filter: blur(40px) saturate(150%);
+      -webkit-backdrop-filter: blur(40px) saturate(150%);
+      padding: 2rem;
+      border-radius: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1.5px solid rgba(201, 169, 97, 0.25);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .setting-group {
+      background: rgba(20, 25, 30, 0.7);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(201, 169, 97, 0.2);
+    }
+
+    .setting-label {
+      font-size: 0.85rem;
+      color: #8e8e93;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+    }
+
+    .setting-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #C9A961;
+    }
+
+    .slider {
+      width: 100%;
+      margin-top: 0.75rem;
+      -webkit-appearance: none;
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(201, 169, 97, 0.15);
+      outline: none;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #C9A961;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 12px rgba(201, 169, 97, 0.8);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .checkbox {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      accent-color: #C9A961;
+    }
+
+    .difficulty-selector {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .difficulty-btn {
+      flex: 1;
+      padding: 0.5rem;
+      background: rgba(20, 25, 30, 0.6);
+      border: 1px solid rgba(201, 169, 97, 0.2);
+      border-radius: 0.5rem;
+      color: #8e8e93;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .difficulty-btn:hover {
+      border-color: #C9A961;
+    }
+
+    .difficulty-btn.active {
+      background: rgba(201, 169, 97, 0.15);
+      border-color: #C9A961;
+      color: #C9A961;
+    }
+
+    .scoreboard {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .player-panel {
+      flex: 1;
+      background: rgba(28, 28, 30, 0.85);
+      backdrop-filter: blur(40px) saturate(150%);
+      -webkit-backdrop-filter: blur(40px) saturate(150%);
+      padding: 2rem;
+      border-radius: 1.5rem;
+      border: 1.5px solid rgba(201, 169, 97, 0.25);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .player-panel.active {
+      border-color: #C9A961;
+      box-shadow: 0 0 32px rgba(201, 169, 97, 0.3);
+    }
+
+    .player-panel.active::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #C9A961, rgba(201, 169, 97, 0.8));
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .player-emoji {
+      font-size: 4rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .player-name {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #C9A961;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .player-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .player-stat {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(20, 25, 30, 0.7);
+      border-radius: 0.75rem;
+    }
+
+    .player-stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #C9A961;
+    }
+
+    .player-stat-label {
+      font-size: 0.7rem;
+      color: #636366;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.25rem;
+    }
+
+    .powerup-display {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(201, 169, 97, 0.2);
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .powerup-item {
+      background: rgba(20, 25, 30, 0.7);
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid rgba(201, 169, 97, 0.2);
+    }
+
+    .powerup-item.active {
+      background: rgba(201, 169, 97, 0.15);
+      border-color: #C9A961;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .round-indicator {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(201, 169, 97, 0.08);
+      border-radius: 1rem;
+      border: 1px solid rgba(201, 169, 97, 0.25);
+    }
+
+    .round-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #C9A961;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .round-progress {
+      margin-top: 1rem;
+      height: 12px;
+      background: rgba(201, 169, 97, 0.15);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .round-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #C9A961, rgba(201, 169, 97, 0.8));
+      border-radius: 6px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .board-container {
+      background: rgba(28, 28, 30, 0.85);
+      backdrop-filter: blur(40px) saturate(150%);
+      -webkit-backdrop-filter: blur(40px) saturate(150%);
+      padding: 2rem;
+      border-radius: 1.5rem;
+      border: 1.5px solid rgba(201, 169, 97, 0.25);
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .board {
+      display: grid;
+      gap: 1rem;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+    .board.size-3 { grid-template-columns: repeat(3, 1fr); }
+    .board.size-4 { grid-template-columns: repeat(4, 1fr); }
+    .board.size-5 { grid-template-columns: repeat(5, 1fr); }
+
+    .cell {
+      aspect-ratio: 1;
+      background: rgba(28, 28, 30, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 2px solid rgba(201, 169, 97, 0.25);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .cell::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .cell:hover:not(.claimed-X):not(.claimed-O):not(.special-cell)::before {
+      opacity: 1;
+    }
+
+    .cell:hover:not(.claimed-X):not(.claimed-O) {
+      transform: scale(1.05);
+      border-color: rgba(201, 169, 97, 0.5);
+      box-shadow: 0 8px 24px rgba(201, 169, 97, 0.25);
+    }
+
+    .cell.claimed-X {
+      background: rgba(255, 59, 100, 0.2);
+      border-color: #ff3b64;
+      cursor: not-allowed;
+    }
+
+    .cell.claimed-O {
+      background: rgba(52, 199, 150, 0.2);
+      border-color: #34c796;
+      cursor: not-allowed;
+    }
+
+    .cell.special-cell {
+      background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(201, 169, 97, 0.08));
+      border-color: #C9A961;
+      animation: specialGlow 3s ease-in-out infinite;
+    }
+
+    .cell.special-cell::after {
+      content: '⭐';
+      position: absolute;
+      top: 0.25rem;
+      right: 0.25rem;
+      font-size: 1rem;
+    }
+
+    @keyframes specialGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(201, 169, 97, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(201, 169, 97, 0.5); }
+    }
+
+    .timer-container {
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      background: rgba(28, 28, 30, 0.95);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      border: 1.5px solid rgba(201, 169, 97, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      display: none;
+    }
+
+    .timer-container.show {
+      display: block;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateX(-50%) translateY(-100px); opacity: 0; }
+      to { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+
+    .timer-display {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #C9A961;
+      text-align: center;
+    }
+
+    .timer-display.warning {
+      color: #ff9500;
+      animation: timerPulse 1s ease-in-out infinite;
+    }
+
+    .timer-display.danger {
+      color: #ff3b30;
+      animation: timerPulse 0.5s ease-in-out infinite;
+    }
+
+    @keyframes timerPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #C9A961 0%, rgba(201, 169, 97, 0.85) 100%);
+      color: white;
+      box-shadow: 0 4px 16px rgba(201, 169, 97, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(201, 169, 97, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(28, 28, 30, 0.85);
+      border: 1px solid rgba(201, 169, 97, 0.25);
+      color: #e5e5e7;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(28, 28, 30, 0.95);
+      border-color: rgba(201, 169, 97, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn-powerup {
+      background: rgba(201, 169, 97, 0.15);
+      border: 1px solid #C9A961;
+      color: #C9A961;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .btn-powerup:hover:not(:disabled) {
+      background: rgba(201, 169, 97, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal {
+      background: rgba(28, 28, 30, 0.98);
+      backdrop-filter: blur(60px) saturate(150%);
+      -webkit-backdrop-filter: blur(60px) saturate(150%);
+      border: 1.5px solid rgba(201, 169, 97, 0.3);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      max-width: 750px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal::-webkit-scrollbar { width: 8px; }
+    .modal::-webkit-scrollbar-track { background: transparent; }
+    .modal::-webkit-scrollbar-thumb {
+      background: rgba(107, 142, 255, 0.3);
+      border-radius: 4px;
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(107, 142, 255, 0.2);
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      color: #C9A961;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .question-counter {
+      text-align: center;
+      color: #8e8e93;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .question-card {
+      background: rgba(20, 25, 30, 0.7);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(201, 169, 97, 0.2);
+      position: relative;
+    }
+
+    .question-category {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: rgba(201, 169, 97, 0.15);
+      color: #C9A961;
+      border: 1px solid rgba(201, 169, 97, 0.3);
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      color: #e5e5e7;
+      font-weight: 500;
+      padding-right: 7rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .option-btn {
+      padding: 1rem;
+      background: rgba(28, 28, 30, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(201, 169, 97, 0.2);
+      border-radius: 0.75rem;
+      color: #e5e5e7;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background: rgba(28, 28, 30, 0.95);
+      border-color: rgba(201, 169, 97, 0.4);
+      transform: translateX(4px);
+    }
+
+    .option-btn.selected {
+      background: rgba(201, 169, 97, 0.15);
+      border-color: #C9A961;
+      font-weight: 600;
+    }
+
+    .option-btn.correct {
+      background: rgba(52, 199, 150, 0.2);
+      border-color: #34c796;
+      color: #34c796;
+      font-weight: 700;
+    }
+
+    .option-btn.wrong {
+      background: rgba(255, 59, 100, 0.2);
+      border-color: #ff3b64;
+      color: #ff3b64;
+      font-weight: 700;
+    }
+
+    .option-btn:disabled { cursor: not-allowed; }
+
+    .feedback {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .feedback.correct {
+      background: rgba(52, 199, 150, 0.15);
+      border: 1px solid rgba(52, 199, 150, 0.3);
+      color: #34c796;
+      display: block;
+    }
+
+    .feedback.wrong {
+      background: rgba(255, 59, 100, 0.15);
+      border: 1px solid rgba(255, 59, 100, 0.3);
+      color: #ff3b64;
+      display: block;
+    }
+
+    .explanation {
+      margin-top: 0.5rem;
+      padding: 0.75rem;
+      background: rgba(201, 169, 97, 0.08);
+      border-left: 3px solid #C9A961;
+      border-radius: 0.5rem;
+      font-size: 0.85rem;
+      color: #8e8e93;
+      line-height: 1.5;
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(201, 169, 97, 0.2);
+    }
+
+    .feedback-global {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 9999;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .feedback-global.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .feedback-global.success {
+      background: rgba(52, 199, 150, 0.95);
+      color: white;
+    }
+
+    .feedback-global.error {
+      background: rgba(255, 59, 100, 0.95);
+      color: white;
+    }
+
+    .achievements-panel {
+      background: rgba(28, 28, 30, 0.85);
+      backdrop-filter: blur(40px) saturate(150%);
+      -webkit-backdrop-filter: blur(40px) saturate(150%);
+      padding: 2rem;
+      border-radius: 1.5rem;
+      border: 1.5px solid rgba(201, 169, 97, 0.25);
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .achievement-card {
+      background: rgba(20, 25, 30, 0.7);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      text-align: center;
+      border: 1px solid rgba(201, 169, 97, 0.2);
+      transition: all 0.3s;
+    }
+
+    .achievement-card.unlocked {
+      background: rgba(201, 169, 97, 0.12);
+      border-color: #C9A961;
+    }
+
+    .achievement-card:hover.unlocked {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(201, 169, 97, 0.25);
+    }
+
+    .achievement-card .achievement-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      filter: grayscale(100%);
+      opacity: 0.3;
+    }
+
+    .achievement-card.unlocked .achievement-icon {
+      filter: none;
+      opacity: 1;
+    }
+
+    .achievement-card .achievement-name {
+      font-size: 0.9rem;
+      color: #636366;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .achievement-card.unlocked .achievement-name {
+      color: #C9A961;
+    }
+
+    .achievement-card .achievement-desc {
+      font-size: 0.75rem;
+      color: #3a4b6e;
+      line-height: 1.3;
+    }
+
+    .achievement-card.unlocked .achievement-desc {
+      color: #8e8e93;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 2rem; }
+      .scoreboard { flex-direction: column; }
+      .player-stats { grid-template-columns: repeat(3, 1fr); }
+      .cell { font-size: 2rem; }
+      .options-grid { grid-template-columns: 1fr; }
+      .profile-badge { 
+        position: static; 
+        margin: 0 auto 1rem;
+        width: fit-content;
+      }
+      .question-text { padding-right: 1rem; }
+      .header { padding-top: 0; }
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="profile-badge" onclick="showAchievements()">
+        <span class="achievement-icon">🎓</span>
+        <span class="xp-display" id="xpDisplay">Level 1 • 0 XP</span>
+      </div>
+      <h1>INTUITY</h1>
+      <p class="subtitle">C1/C2 Passive Voice Master</p>
+      <p class="author">by Majid Nashtai</p>
+      <div class="cambridge-badge">Advanced & Proficient Level</div>
+    </div>
+
+    <div id="modeSelector" class="mode-selector">
+      <div class="mode-card" onclick="selectMode('quick')">
+        <div class="mode-icon">⚡</div>
+        <div class="mode-title">Quick Battle</div>
+        <div class="mode-desc">3×3 grid, C1/C2 mixed passive voice</div>
+        <div class="mode-stats">
+          <div class="stat">
+            <div class="stat-value">3×3</div>
+            <div class="stat-label">Grid</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">1</div>
+            <div class="stat-label">Round</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Q/Cell</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mode-card" onclick="selectMode('advanced')">
+        <div class="mode-icon">🎯</div>
+        <div class="mode-title">Advanced Mode</div>
+        <div class="mode-desc">Best of 3, complex structures</div>
+        <div class="mode-stats">
+          <div class="stat">
+            <div class="stat-value">3×3</div>
+            <div class="stat-label">Grid</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Rounds</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Q/Cell</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mode-card" onclick="selectMode('marathon')">
+        <div class="mode-icon">🚀</div>
+        <div class="mode-title">Passive Marathon</div>
+        <div class="mode-desc">4×4 grid, timed challenge</div>
+        <div class="mode-stats">
+          <div class="stat">
+            <div class="stat-value">4×4</div>
+            <div class="stat-label">Grid</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">1</div>
+            <div class="stat-label">Round</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Q/Cell</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mode-card" onclick="selectMode('custom')">
+        <div class="mode-icon">⚙️</div>
+        <div class="mode-title">Custom</div>
+        <div class="mode-desc">Design your own challenge</div>
+        <div class="mode-stats">
+          <div class="stat">
+            <div class="stat-value">?</div>
+            <div class="stat-label">Custom</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">?</div>
+            <div class="stat-label">Custom</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">?</div>
+            <div class="stat-label">Custom</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="gameSettings" class="game-settings hidden">
+      <h2 style="color: #6B8EFF; margin-bottom: 1.5rem; text-align: center; text-transform: uppercase; letter-spacing: 2px;">Game Settings</h2>
+      
+      <div class="settings-grid">
+        <div class="setting-group">
+          <div class="setting-label">Grid Size</div>
+          <div class="setting-value" id="gridSizeValue">3×3</div>
+          <input type="range" class="slider" id="gridSizeSlider" min="3" max="5" value="3" oninput="updateGridSize(this.value)">
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Total Rounds</div>
+          <div class="setting-value" id="roundsValue">1</div>
+          <input type="range" class="slider" id="roundsSlider" min="1" max="5" value="1" oninput="updateRounds(this.value)">
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Questions per Cell</div>
+          <div class="setting-value" id="questionsValue">5</div>
+          <input type="range" class="slider" id="questionsSlider" min="3" max="7" value="5" oninput="updateQuestions(this.value)">
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Difficulty Level</div>
+          <div class="difficulty-selector">
+            <button class="difficulty-btn active" onclick="setDifficulty('advanced')">C1</button>
+            <button class="difficulty-btn" onclick="setDifficulty('proficient')">C2</button>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Timer Mode</div>
+          <div class="checkbox-group">
+            <input type="checkbox" class="checkbox" id="timerCheckbox" onchange="updateTimer(this.checked)">
+            <label for="timerCheckbox" style="color: #8e9bc1; font-size: 0.9rem;">45s per question</label>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Power-Ups</div>
+          <div class="checkbox-group">
+            <input type="checkbox" class="checkbox" id="specialCellsCheckbox" checked onchange="updateSpecialCells(this.checked)">
+            <label for="specialCellsCheckbox" style="color: #8e9bc1; font-size: 0.9rem;">Enable power-ups</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-secondary" onclick="backToModes()">← Back</button>
+        <button class="btn btn-primary" onclick="startGame()">Start Game →</button>
+      </div>
+    </div>
+
+    <div id="gameArea" class="hidden">
+      <div class="timer-container" id="timerContainer">
+        <div class="timer-display" id="timerDisplay">45</div>
+      </div>
+
+      <div class="round-indicator">
+        <div class="round-text" id="roundText">Round 1 of 1</div>
+        <div class="round-progress">
+          <div class="round-progress-bar" id="roundProgressBar" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="scoreboard">
+        <div class="player-panel" id="panelX">
+          <div class="player-emoji">❌</div>
+          <div class="player-name">Player X</div>
+          <div class="player-stats">
+            <div class="player-stat">
+              <div class="player-stat-value" id="winsX">0</div>
+              <div class="player-stat-label">Rounds Won</div>
+            </div>
+            <div class="player-stat">
+              <div class="player-stat-value" id="cellsX">0</div>
+              <div class="player-stat-label">Cells</div>
+            </div>
+            <div class="player-stat">
+              <div class="player-stat-value" id="correctX">0</div>
+              <div class="player-stat-label">Correct</div>
+            </div>
+          </div>
+          <div class="powerup-display" id="powerupsX"></div>
+        </div>
+
+        <div class="player-panel" id="panelO">
+          <div class="player-emoji">⭕</div>
+          <div class="player-name">Player O</div>
+          <div class="player-stats">
+            <div class="player-stat">
+              <div class="player-stat-value" id="winsO">0</div>
+              <div class="player-stat-label">Rounds Won</div>
+            </div>
+            <div class="player-stat">
+              <div class="player-stat-value" id="cellsO">0</div>
+              <div class="player-stat-label">Cells</div>
+            </div>
+            <div class="player-stat">
+              <div class="player-stat-value" id="correctO">0</div>
+              <div class="player-stat-label">Correct</div>
+            </div>
+          </div>
+          <div class="powerup-display" id="powerupsO"></div>
+        </div>
+      </div>
+
+      <div class="board-container">
+        <div class="board size-3" id="board"></div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-secondary" onclick="backToMenu()" id="backBtn">← Main Menu</button>
+        <button class="btn btn-powerup" onclick="usePowerup('hint')" id="btnHint" disabled>💡 Hint (0)</button>
+        <button class="btn btn-powerup" onclick="usePowerup('skip')" id="btnSkip" disabled>⏭️ Skip (0)</button>
+        <button class="btn btn-secondary" onclick="forfeitGame()" id="forfeitBtn">Forfeit Round</button>
+        <button class="btn btn-primary" onclick="nextRound()" id="nextRoundBtn" style="display: none;">Next Round →</button>
+      </div>
+    </div>
+
+    <div id="achievementsPanel" class="achievements-panel hidden">
+      <h2 style="color: #6B8EFF; margin-bottom: 1.5rem; text-align: center; text-transform: uppercase; letter-spacing: 2px;">Achievements</h2>
+      <div class="achievements-grid" id="achievementsGrid"></div>
+      <div class="controls" style="margin-top: 2rem;">
+        <button class="btn btn-secondary" onclick="closeAchievements()">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal" id="questionModal" onclick="event.stopPropagation()">
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div class="feedback-global" id="globalFeedback"></div>
+
+  <script>
+    // C1/C2 PASSIVE VOICE QUESTION BANK - British Publication Style
+    const QUESTION_BANK = {
+      "SimplePassive": {
+        advanced: [
+          {q:"The government's proposal _____ by parliament next month, according to sources close to Downing Street.",opts:["will review","will be reviewed","is reviewing","reviews"],ans:1,exp:"Future Simple Passive: will be + past participle. BBC-style reporting.",cat:"Simple Passive"},
+          {q:"Climate activists _____ from the premises after disrupting the shareholders' meeting.",opts:["removed","were removing","were removed","had removed"],ans:2,exp:"Past Simple Passive for completed action. Guardian-style news reporting.",cat:"Simple Passive"},
+          {q:"The historic manuscript _____ in a private collection for over two centuries before its discovery.",opts:["was keeping","has been kept","had been kept","had kept"],ans:2,exp:"Past Perfect Passive for state before discovery. Formal British style.",cat:"Simple Passive"},
+          {q:"New legislation _____ to address the housing crisis in urban centres across the country.",opts:["is being drafted","drafts","was drafting","has drafted"],ans:0,exp:"Present Continuous Passive for ongoing action. Times-style reporting.",cat:"Simple Passive"},
+          {q:"The controversial artwork _____ from public display following complaints from several community groups.",opts:["has removed","had removed","has been removed","was removing"],ans:2,exp:"Present Perfect Passive for recent action with present relevance.",cat:"Simple Passive"},
+          {q:"Confidential documents _____ by the inquiry team when the scandal first emerged last year.",opts:["were being examined","were examined","examined","have examined"],ans:0,exp:"Past Continuous Passive for action in progress at a past time.",cat:"Simple Passive"},
+          {q:"The ancient artefacts _____ to the national museum once the restoration work is complete.",opts:["will return","will be returned","are returning","return"],ans:1,exp:"Future Simple Passive. Formal museum/cultural reporting style.",cat:"Simple Passive"},
+          {q:"Security measures _____ significantly since the incident was first reported to authorities.",opts:["have strengthened","were strengthened","have been strengthened","are strengthening"],ans:2,exp:"Present Perfect Passive showing change from past to present.",cat:"Simple Passive"}
+        ],
+        proficient: [
+          {q:"The allegations _____ vehemently by the minister, who described them as politically motivated.",opts:["were denied","were denying","had denied","have denied"],ans:0,exp:"Past Simple Passive in formal denial statements. C2 vocabulary usage.",cat:"Simple Passive"},
+          {q:"By the time investigators arrived at the scene, crucial evidence _____ by heavy rainfall.",opts:["was destroyed","had been destroyed","has been destroyed","destroyed"],ans:1,exp:"Past Perfect Passive for action completed before another past action.",cat:"Simple Passive"},
+          {q:"The humanitarian crisis _____ for months before the international community finally intervened.",opts:["had been unfolding","was unfolding","has been unfolding","unfolds"],ans:0,exp:"Past Perfect Continuous Passive for extended duration before intervention.",cat:"Simple Passive"},
+          {q:"Sweeping reforms _____ across the sector, despite fierce opposition from traditionalists.",opts:["are implementing","are being implemented","have implemented","implement"],ans:1,exp:"Present Continuous Passive for ongoing institutional change.",cat:"Simple Passive"},
+          {q:"The diplomatic tensions _____ considerably since the ambassador's controversial remarks last week.",opts:["have exacerbated","were exacerbated","have been exacerbated","had exacerbated"],ans:2,exp:"Present Perfect Passive showing worsening situation. Diplomatic reporting.",cat:"Simple Passive"},
+          {q:"Historic buildings _____ throughout the city centre to their former Georgian splendour.",opts:["are being restored","restore","have restored","were restoring"],ans:0,exp:"Present Continuous Passive for ongoing restoration projects.",cat:"Simple Passive"},
+          {q:"The findings _____ in a peer-reviewed journal before being announced to the wider public.",opts:["will publish","will have published","will be published","will have been published"],ans:3,exp:"Future Perfect Passive for action completed before future time. Academic style.",cat:"Simple Passive"},
+          {q:"Stringent regulations _____ by the regulatory body following the industry-wide investigation.",opts:["are imposing","have been imposed","were imposing","impose"],ans:1,exp:"Present Perfect Passive for recently introduced measures.",cat:"Simple Passive"}
+        ]
+      },
+      "CausativePassive": {
+        advanced: [
+          {q:"The committee _____ the report _____ by independent auditors before publication.",opts:["had...review","had...reviewed","has...reviewing","had...reviewing"],ans:1,exp:"Causative Past Perfect: had + object + past participle. Formal committee proceedings.",cat:"Causative"},
+          {q:"MPs are demanding that the government _____ its economic forecasts _____ by external experts.",opts:["have...verify","has...verified","have...verified","has...verify"],ans:2,exp:"Causative structure with 'have'. Parliamentary reporting style.",cat:"Causative"},
+          {q:"The museum trustees _____ the collection _____ before the exhibition opens next month.",opts:["are having...value","have...valued","are having...valued","have...valuing"],ans:2,exp:"Present Continuous Causative: are having + object + past participle.",cat:"Causative"},
+          {q:"Local residents _____ their properties _____ against flooding following the council's warning.",opts:["have had...protect","have...protected","have had...protected","are having...protect"],ans:2,exp:"Present Perfect Causative showing completed arrangement. News reporting.",cat:"Causative"},
+          {q:"The charity _____ its accounts _____ annually by a reputable firm of accountants.",opts:["has...audited","has...audit","gets...audited","is getting...audit"],ans:2,exp:"Get-passive causative for regular arrangements. Charity sector reporting.",cat:"Causative"},
+          {q:"The council _____ the historic building _____ after years of neglect and deterioration.",opts:["had finally...restore","finally had...restored","has finally...restored","finally has...restoring"],ans:1,exp:"Past Perfect Causative with 'finally' showing eventual action.",cat:"Causative"},
+          {q:"Universities _____ their courses _____ regularly to maintain quality standards.",opts:["get...review","have...reviewed","get...reviewed","have...reviewing"],ans:2,exp:"Get-passive for regular recurring arrangements. Education sector.",cat:"Causative"},
+          {q:"The department _____ its IT systems _____ following the security breach last month.",opts:["has had...upgrade","has...upgraded","has had...upgraded","is having...upgrade"],ans:2,exp:"Present Perfect Causative showing recent completed arrangement.",cat:"Causative"}
+        ],
+        proficient: [
+          {q:"The corporation _____ its controversial advertising campaign _____ following the public backlash.",opts:["had...withdraw","had...withdrawn","has had...withdraw","had had...withdrawn"],ans:1,exp:"Past Perfect Causative. Corporate crisis management reporting.",cat:"Causative"},
+          {q:"Senior officials _____ the policy document _____ extensively before presenting it to cabinet.",opts:["had had...revise","had...revised","have had...revising","had had...revised"],ans:3,exp:"Past Perfect Causative (double 'had') for action completed before another past action.",cat:"Causative"},
+          {q:"The publisher _____ the memoir _____ by lawyers before agreeing to print the contentious chapters.",opts:["had had...vet","has...vetted","had...vetted","had...vetting"],ans:2,exp:"Past Perfect Causative in publishing context. Legal vetting process.",cat:"Causative"},
+          {q:"Shareholders _____ the board _____ following the scandal that rocked the financial sector.",opts:["had...replace","had had...replaced","have...replaced","had...replaced"],ans:1,exp:"Past Perfect Causative showing forced replacement. Financial journalism.",cat:"Causative"},
+          {q:"The trust _____ the medieval chapel _____ to prevent further deterioration of the frescoes.",opts:["has had...restore","is having...restored","has...restored","gets...restored"],ans:1,exp:"Present Continuous Causative for ongoing restoration. Heritage reporting.",cat:"Causative"},
+          {q:"Diplomatic sources suggest that the government _____ the agreement _____ by legal experts.",opts:["will have...scrutinise","will have had...scrutinised","will have...scrutinised","has had...scrutinised"],ans:1,exp:"Future Perfect Causative. Diplomatic reporting with future action.",cat:"Causative"},
+          {q:"The family _____ the estate _____ after discovering the extent of the structural damage.",opts:["had...survey","had had...surveyed","has...surveyed","had...surveyed"],ans:1,exp:"Past Perfect Causative. Property and inheritance reporting.",cat:"Causative"},
+          {q:"Regulators insist that banks _____ their capital reserves _____ regularly by independent assessors.",opts:["get...assess","have...assessed","get...assessed","have...assessing"],ans:2,exp:"Get-passive causative for regulatory requirements. Financial regulation.",cat:"Causative"}
+        ]
+      },
+      "ReportingVerbs": {
+        advanced: [
+          {q:"The prime minister _____ considering a cabinet reshuffle following the electoral setback.",opts:["is said to be","is said being","says to be","is saying to be"],ans:0,exp:"Reporting verb passive: is said + to be + -ing. Political journalism.",cat:"Reporting Verbs"},
+          {q:"The diplomat _____ played a crucial role in brokering the peace agreement last year.",opts:["is believed to play","is believed to have played","believes to have played","is believing to play"],ans:1,exp:"Perfect infinitive after reporting verb for past action: is believed to have + past participle.",cat:"Reporting Verbs"},
+          {q:"Several witnesses _____ the suspect fleeing the scene shortly after the incident occurred.",opts:["are reported to see","are reported to have seen","report to have seen","are reporting to see"],ans:1,exp:"Perfect infinitive passive: are reported to have + past participle. Crime reporting.",cat:"Reporting Verbs"},
+          {q:"The manuscript _____ by a Renaissance master, though definitive attribution remains elusive.",opts:["is thought to have been written","thinks to have been written","is thought to write","thinks to be written"],ans:0,exp:"Perfect passive infinitive: is thought to have been + past participle. Art history.",cat:"Reporting Verbs"},
+          {q:"The chancellor _____ warning colleagues about the economic risks for several months.",opts:["is said to have been","is said to be","says to have been","is saying to be"],ans:0,exp:"Perfect continuous infinitive: is said to have been + -ing. Treasury reporting.",cat:"Reporting Verbs"},
+          {q:"Inflation _____ reaching its peak, according to analysts at the Bank of England.",opts:["is expected to be","expects to be","is expected being","expects being"],ans:0,exp:"Reporting verb with continuous infinitive: is expected to be + -ing. Economic forecasting.",cat:"Reporting Verbs"},
+          {q:"The ancient settlement _____ thousands of years old based on the archaeological evidence.",opts:["is estimated to be","estimates to be","is estimated being","estimates being"],ans:0,exp:"Reporting verb with infinitive: is estimated to be. Archaeological reporting.",cat:"Reporting Verbs"},
+          {q:"The scientist _____ on the verge of a breakthrough when the funding was abruptly withdrawn.",opts:["was believed to be","believed to be","was believed being","believes to be"],ans:0,exp:"Past reporting verb with continuous infinitive. Scientific journalism.",cat:"Reporting Verbs"}
+        ],
+        proficient: [
+          {q:"The policy _____ a significant impact on living standards, according to independent think tanks.",opts:["is predicted to have","predicts to have","is predicted to have had","is predicting to have"],ans:0,exp:"Reporting verb with infinitive for future impact. Policy analysis reporting.",cat:"Reporting Verbs"},
+          {q:"Senior civil servants _____ expressing reservations about the proposals long before they became public.",opts:["are understood to be","are understood to have been","understand to have been","are understanding to be"],ans:1,exp:"Perfect continuous infinitive: are understood to have been + -ing. Whitehall reporting.",cat:"Reporting Verbs"},
+          {q:"The accused _____ stolen confidential documents before absconding to a jurisdiction without extradition.",opts:["is alleged to steal","is alleged to have stolen","alleges to have stolen","is alleging to steal"],ans:1,exp:"Perfect infinitive after reporting verb: is alleged to have + past participle. Legal reporting.",cat:"Reporting Verbs"},
+          {q:"The phenomenon _____ by climate scientists for decades before the public took notice.",opts:["was known to have been predicted","was known to predict","is known to have predicted","was known to be predicting"],ans:0,exp:"Complex passive with perfect infinitive. Climate science journalism.",cat:"Reporting Verbs"},
+          {q:"The intelligence agencies _____ monitoring the situation closely throughout the diplomatic crisis.",opts:["were reported to be","reported to be","were reported to have been","were reporting to be"],ans:2,exp:"Perfect continuous infinitive in past: were reported to have been + -ing. Intelligence reporting.",cat:"Reporting Verbs"},
+          {q:"The reforms _____ undermining traditional practices within the institution, critics contend.",opts:["are considered to be","consider to be","are considered being","consider being"],ans:0,exp:"Reporting verb with continuous infinitive: are considered to be + -ing. Institutional analysis.",cat:"Reporting Verbs"},
+          {q:"The defendant _____ by witnesses at the location hours before the crime was committed.",opts:["is claimed to see","is claimed to have been seen","claims to have been seen","is claiming to be seen"],ans:1,exp:"Perfect passive infinitive: is claimed to have been + past participle. Court reporting.",cat:"Reporting Verbs"},
+          {q:"The legislation _____ enacted before the parliamentary recess, though debates continue.",opts:["was expected to have been","expected to have been","was expected to be","expects to have been"],ans:0,exp:"Perfect passive infinitive in past: was expected to have been + past participle. Legislative journalism.",cat:"Reporting Verbs"}
+        ]
+      }
+    };
+
+    // ACHIEVEMENTS SYSTEM
+    const ACHIEVEMENTS = {
+      first_win: {icon:"🎯",name:"First Victory",desc:"Win your first round",unlocked:false},
+      perfectionist: {icon:"💯",name:"Perfectionist",desc:"Answer all questions correctly",unlocked:false},
+      speed_demon: {icon:"⚡",name:"Speed Demon",desc:"Complete 5 questions in under 60s",unlocked:false},
+      comeback_king: {icon:"👑",name:"Comeback King",desc:"Win after being behind",unlocked:false},
+      marathon_master: {icon:"🏃",name:"Marathon Master",desc:"Complete a 4×4 grid game",unlocked:false},
+      passive_guru: {icon:"📚",name:"Passive Guru",desc:"Get 50 questions correct",unlocked:false},
+      power_player: {icon:"⚡",name:"Power Player",desc:"Use all power-ups in one game",unlocked:false},
+      triple_threat: {icon:"🏆",name:"Triple Threat",desc:"Win Best of 3 mode",unlocked:false},
+      question_master: {icon:"🎓",name:"Question Master",desc:"Answer 100 questions",unlocked:false},
+      streak_master: {icon:"🔥",name:"Streak Master",desc:"Get 10 correct in a row",unlocked:false}
+    };
+
+    // GAME STATE
+    const GAME = {
+      mode: null,
+      settings: {
+        gridSize: 3,
+        totalRounds: 1,
+        questionsPerCell: 5,
+        timerEnabled: false,
+        difficulty: 'advanced',
+        specialCellsEnabled: true
+      },
+      state: {
+        currentRound: 1,
+        boardState: [],
+        cellQuestionSets: {},
+        specialCells: [],
+        usedQuestionIds: new Set(),
+        currentTurn: 'X',
+        activeCell: null,
+        stats: {
+          X: { roundsWon: 0, cellsClaimed: 0, correctAnswers: 0, streak: 0, powerups: {hint: 2, skip: 2} },
+          O: { roundsWon: 0, cellsClaimed: 0, correctAnswers: 0, streak: 0, powerups: {hint: 2, skip: 2} }
+        },
+        timer: null,
+        timeLeft: 45,
+        activePowerup: null,
+        totalQuestionsAnswered: 0,
+        questionStartTime: 0
+      },
+      selectedAnswers: {},
+      profile: {
+        xp: 0,
+        level: 1,
+        totalCorrect: 0,
+        totalQuestions: 0,
+        achievements: JSON.parse(JSON.stringify(ACHIEVEMENTS))
+      }
+    };
+
+    // Storage functions
+    const storage = {
+      data: {},
+      getItem(key) {
+        return this.data[key] || null;
+      },
+      setItem(key, value) {
+        this.data[key] = value;
+      }
+    };
+
+    function loadProgress() {
+      const saved = storage.getItem('intuityPassiveProgress');
+      if (saved) {
+        try {
+          const data = JSON.parse(saved);
+          GAME.profile = {...GAME.profile, ...data};
+        } catch(e) {}
+      }
+      updateXPDisplay();
+    }
+
+    function saveProgress() {
+      storage.setItem('intuityPassiveProgress', JSON.stringify(GAME.profile));
+    }
+
+    function updateXPDisplay() {
+      const level = GAME.profile.level;
+      const xp = GAME.profile.xp;
+      document.getElementById('xpDisplay').textContent = `Level ${level} • ${xp} XP`;
+    }
+
+    function awardXP(amount, reason) {
+      GAME.profile.xp += amount;
+      const xpForNextLevel = GAME.profile.level * 100;
+      
+      if (GAME.profile.xp >= xpForNextLevel) {
+        GAME.profile.level++;
+        GAME.profile.xp = GAME.profile.xp - xpForNextLevel;
+        showFeedback(`🎊 Level Up! You're now Level ${GAME.profile.level}!`, false);
+      }
+      
+      updateXPDisplay();
+      saveProgress();
+    }
+
+    function unlockAchievement(key) {
+      if (!GAME.profile.achievements[key].unlocked) {
+        GAME.profile.achievements[key].unlocked = true;
+        const ach = GAME.profile.achievements[key];
+        showFeedback(`🏆 Achievement Unlocked: ${ach.name}!`, false);
+        awardXP(50, 'achievement');
+        saveProgress();
+      }
+    }
+
+    function checkAchievements() {
+      const stats = GAME.state.stats;
+      const currentPlayer = stats[GAME.state.currentTurn];
+      
+      if ((stats.X.roundsWon > 0 || stats.O.roundsWon > 0) && !GAME.profile.achievements.first_win.unlocked) {
+        unlockAchievement('first_win');
+      }
+      
+      if (GAME.settings.gridSize === 4 && !GAME.profile.achievements.marathon_master.unlocked) {
+        unlockAchievement('marathon_master');
+      }
+      
+      if (GAME.profile.totalCorrect >= 50 && !GAME.profile.achievements.passive_guru.unlocked) {
+        unlockAchievement('passive_guru');
+      }
+      
+      if (GAME.profile.totalQuestions >= 100 && !GAME.profile.achievements.question_master.unlocked) {
+        unlockAchievement('question_master');
+      }
+      
+      if (currentPlayer.streak >= 10 && !GAME.profile.achievements.streak_master.unlocked) {
+        unlockAchievement('streak_master');
+      }
+      
+      if (GAME.mode === 'advanced' && (stats.X.roundsWon >= 2 || stats.O.roundsWon >= 2)) {
+        unlockAchievement('triple_threat');
+      }
+    }
+
+    function showAchievements() {
+      document.getElementById('modeSelector').classList.add('hidden');
+      document.getElementById('achievementsPanel').classList.remove('hidden');
+      renderAchievements();
+    }
+
+    function closeAchievements() {
+      document.getElementById('achievementsPanel').classList.add('hidden');
+      document.getElementById('modeSelector').classList.remove('hidden');
+    }
+
+    function renderAchievements() {
+      const grid = document.getElementById('achievementsGrid');
+      grid.innerHTML = '';
+      
+      Object.keys(GAME.profile.achievements).forEach(key => {
+        const ach = GAME.profile.achievements[key];
+        const card = document.createElement('div');
+        card.className = `achievement-card ${ach.unlocked ? 'unlocked' : ''}`;
+        card.innerHTML = `
+          <div class="achievement-icon">${ach.icon}</div>
+          <div class="achievement-name">${ach.name}</div>
+          <div class="achievement-desc">${ach.desc}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    const MODE_PRESETS = {
+      'quick': { gridSize: 3, totalRounds: 1, questionsPerCell: 5, timerEnabled: false, difficulty: 'advanced', specialCellsEnabled: true },
+      'advanced': { gridSize: 3, totalRounds: 3, questionsPerCell: 5, timerEnabled: false, difficulty: 'advanced', specialCellsEnabled: true },
+      'marathon': { gridSize: 4, totalRounds: 1, questionsPerCell: 4, timerEnabled: true, difficulty: 'proficient', specialCellsEnabled: true },
+      'custom': { gridSize: 3, totalRounds: 1, questionsPerCell: 5, timerEnabled: false, difficulty: 'advanced', specialCellsEnabled: true }
+    };
+
+    function selectMode(mode) {
+      GAME.mode = mode;
+      const settings = MODE_PRESETS[mode];
+      
+      GAME.settings = {...settings};
+      
+      if (mode === 'custom') {
+        document.getElementById('modeSelector').classList.add('hidden');
+        document.getElementById('gameSettings').classList.remove('hidden');
+        
+        document.getElementById('gridSizeSlider').value = settings.gridSize;
+        document.getElementById('roundsSlider').value = settings.totalRounds;
+        document.getElementById('questionsSlider').value = settings.questionsPerCell;
+        document.getElementById('timerCheckbox').checked = settings.timerEnabled;
+        document.getElementById('specialCellsCheckbox').checked = settings.specialCellsEnabled;
+        
+        updateGridSize(settings.gridSize);
+        updateRounds(settings.totalRounds);
+        updateQuestions(settings.questionsPerCell);
+        setDifficulty(settings.difficulty);
+      } else {
+        startGame();
+      }
+    }
+
+    function updateGridSize(val) {
+      GAME.settings.gridSize = parseInt(val);
+      document.getElementById('gridSizeValue').textContent = `${val}×${val}`;
+    }
+
+    function updateRounds(val) {
+      GAME.settings.totalRounds = parseInt(val);
+      document.getElementById('roundsValue').textContent = val;
+    }
+
+    function updateQuestions(val) {
+      GAME.settings.questionsPerCell = parseInt(val);
+      document.getElementById('questionsValue').textContent = val;
+    }
+
+    function updateTimer(checked) {
+      GAME.settings.timerEnabled = checked;
+    }
+
+    function updateSpecialCells(checked) {
+      GAME.settings.specialCellsEnabled = checked;
+    }
+
+    function setDifficulty(level) {
+      GAME.settings.difficulty = level;
+      document.querySelectorAll('.difficulty-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+
+    function backToModes() {
+      document.getElementById('gameSettings').classList.add('hidden');
+      document.getElementById('modeSelector').classList.remove('hidden');
+    }
+
+    function startGame() {
+      const size = GAME.settings.gridSize;
+      GAME.state.boardState = Array(size * size).fill(null);
+      GAME.state.currentRound = 1;
+      GAME.state.currentTurn = 'X';
+      GAME.state.cellQuestionSets = {};
+      GAME.state.usedQuestionIds.clear();
+      GAME.state.totalQuestionsAnswered = 0;
+      GAME.state.stats = {
+        X: { roundsWon: 0, cellsClaimed: 0, correctAnswers: 0, streak: 0, powerups: {hint: 2, skip: 2} },
+        O: { roundsWon: 0, cellsClaimed: 0, correctAnswers: 0, streak: 0, powerups: {hint: 2, skip: 2} }
+      };
+      
+      if (GAME.settings.specialCellsEnabled) {
+        const numSpecial = Math.floor(size * size * 0.2);
+        GAME.state.specialCells = [];
+        while (GAME.state.specialCells.length < numSpecial) {
+          const cell = Math.floor(Math.random() * size * size);
+          if (!GAME.state.specialCells.includes(cell)) {
+            GAME.state.specialCells.push(cell);
+          }
+        }
+      }
+      
+      document.getElementById('modeSelector').classList.add('hidden');
+      document.getElementById('gameSettings').classList.add('hidden');
+      document.getElementById('gameArea').classList.remove('hidden');
+      
+      updateRoundDisplay();
+      updateStats();
+      updatePowerupButtons();
+      renderBoard();
+      updateTurnIndicator();
+    }
+
+    function renderBoard() {
+      const board = document.getElementById('board');
+      const size = GAME.settings.gridSize;
+      
+      board.className = `board size-${size}`;
+      board.innerHTML = '';
+      
+      for (let i = 0; i < size * size; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.dataset.cell = i;
+        
+        if (GAME.state.specialCells.includes(i) && !GAME.state.boardState[i]) {
+          cell.classList.add('special-cell');
+        }
+        
+        if (GAME.state.boardState[i]) {
+          cell.textContent = GAME.state.boardState[i] === 'X' ? '❌' : '⭕';
+          cell.classList.add(`claimed-${GAME.state.boardState[i]}`);
+        }
+        
+        cell.onclick = () => openCellModal(i);
+        board.appendChild(cell);
+      }
+    }
+
+    function getQuestionId(q) {
+      return `${q.q}_${q.ans}_${q.cat || 'general'}`;
+    }
+
+    function selectFreshQuestions() {
+      const difficulty = GAME.settings.difficulty;
+      const needed = GAME.settings.questionsPerCell;
+      const allQuestions = [];
+      
+      Object.keys(QUESTION_BANK).forEach(category => {
+        const categoryQuestions = QUESTION_BANK[category][difficulty] || [];
+        categoryQuestions.forEach(q => {
+          allQuestions.push({...q, category});
+        });
+      });
+      
+      let available = allQuestions.filter(q => {
+        return !GAME.state.usedQuestionIds.has(getQuestionId(q));
+      });
+      
+      if (available.length < needed) {
+        GAME.state.usedQuestionIds.clear();
+        available = allQuestions;
+      }
+      
+      const shuffled = available.sort(() => Math.random() - 0.5);
+      const selected = shuffled.slice(0, needed);
+      
+      selected.forEach(q => {
+        GAME.state.usedQuestionIds.add(getQuestionId(q));
+      });
+      
+      return selected;
+    }
+
+    function openCellModal(cellIndex) {
+      if (GAME.state.boardState[cellIndex] !== null) {
+        showFeedback('⚠️ This cell is already claimed!', true);
+        return;
+      }
+      
+      GAME.state.activeCell = cellIndex;
+      GAME.state.questionStartTime = Date.now();
+      
+      if (!GAME.state.cellQuestionSets[cellIndex]) {
+        GAME.state.cellQuestionSets[cellIndex] = selectFreshQuestions();
+      }
+      
+      const questions = GAME.state.cellQuestionSets[cellIndex];
+      renderQuestionModal(questions, cellIndex);
+      
+      if (GAME.settings.timerEnabled) {
+        startTimer();
+      }
+    }
+
+    function startTimer() {
+      GAME.state.timeLeft = 45;
+      const container = document.getElementById('timerContainer');
+      const display = document.getElementById('timerDisplay');
+      
+      container.classList.add('show');
+      display.textContent = GAME.state.timeLeft;
+      display.className = 'timer-display';
+      
+      clearInterval(GAME.state.timer);
+      GAME.state.timer = setInterval(() => {
+        GAME.state.timeLeft--;
+        display.textContent = GAME.state.timeLeft;
+        
+        if (GAME.state.timeLeft <= 15) {
+          display.className = 'timer-display warning';
+        }
+        if (GAME.state.timeLeft <= 5) {
+          display.className = 'timer-display danger';
+        }
+        
+        if (GAME.state.timeLeft <= 0) {
+          clearInterval(GAME.state.timer);
+          container.classList.remove('show');
+          showFeedback('⏰ Time\'s up!', true);
+          closeModal();
+          switchTurn();
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(GAME.state.timer);
+      document.getElementById('timerContainer').classList.remove('show');
+    }
+
+    function renderQuestionModal(questions, cellIndex) {
+      const overlay = document.getElementById('modalOverlay');
+      const content = document.getElementById('modalContent');
+      
+      const isSpecial = GAME.state.specialCells.includes(cellIndex);
+      
+      let html = `
+        <div class="modal-header">
+          <div class="modal-title">Cell ${cellIndex + 1} - ${GAME.state.currentTurn}'s Turn ${isSpecial ? '⭐ BONUS' : ''}</div>
+        </div>
+        <div class="question-counter">Answer ${GAME.settings.questionsPerCell} questions correctly!</div>
+      `;
+      
+      questions.forEach((q, idx) => {
+        html += `
+          <div class="question-card" data-q-index="${idx}">
+            <div class="question-category">${q.cat || 'Passive Voice'}</div>
+            <div class="question-text">${idx + 1}. ${q.q}</div>
+            <div class="options-grid" id="options-${idx}">
+              ${q.opts.map((opt, optIdx) => `
+                <button 
+                  class="option-btn" 
+                  onclick="selectAnswer(${idx}, ${optIdx})"
+                  id="opt-${idx}-${optIdx}"
+                >
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+            <div class="feedback" id="feedback-${idx}"></div>
+          </div>
+        `;
+      });
+      
+      html += `
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          <button class="btn btn-primary" onclick="submitAnswers()">Submit All</button>
+        </div>
+      `;
+      
+      content.innerHTML = html;
+      overlay.classList.add('show');
+    }
+
+    function selectAnswer(qIndex, optIndex) {
+      GAME.selectedAnswers[qIndex] = optIndex;
+      
+      const card = document.querySelector(`[data-q-index="${qIndex}"]`);
+      const buttons = card.querySelectorAll('.option-btn');
+      
+      buttons.forEach((btn, idx) => {
+        btn.classList.remove('selected');
+        if (idx === optIndex) {
+          btn.classList.add('selected');
+        }
+      });
+    }
+
+    function usePowerup(type) {
+      const currentPlayer = GAME.state.stats[GAME.state.currentTurn];
+      
+      if (type === 'hint') {
+        if (currentPlayer.powerups.hint <= 0) {
+          showFeedback('❌ No Hint power-ups left!', true);
+          return;
+        }
+        
+        currentPlayer.powerups.hint--;
+        GAME.state.activePowerup = 'hint';
+        
+        const questions = GAME.state.cellQuestionSets[GAME.state.activeCell];
+        questions.forEach((q, idx) => {
+          const correctAns = q.ans;
+          const wrongIndices = q.opts.map((_, i) => i).filter(i => i !== correctAns);
+          const toRemove = wrongIndices.sort(() => Math.random() - 0.5).slice(0, 2);
+          
+          toRemove.forEach(optIdx => {
+            const btn = document.getElementById(`opt-${idx}-${optIdx}`);
+            if (btn) {
+              btn.disabled = true;
+              btn.style.opacity = '0.3';
+            }
+          });
+        });
+        
+        showFeedback('💡 Hint activated! 2 wrong answers removed!', false);
+        updatePowerupButtons();
+      }
+      
+      if (type === 'skip') {
+        if (currentPlayer.powerups.skip <= 0) {
+          showFeedback('❌ No Skip power-ups left!', true);
+          return;
+        }
+        
+        currentPlayer.powerups.skip--;
+        showFeedback('⏭️ Question skipped!', false);
+        closeModal();
+        updatePowerupButtons();
+      }
+    }
+
+    function updatePowerupButtons() {
+      const currentPlayer = GAME.state.stats[GAME.state.currentTurn];
+      
+      const btnHint = document.getElementById('btnHint');
+      const btnSkip = document.getElementById('btnSkip');
+      
+      btnHint.textContent = `💡 Hint (${currentPlayer.powerups.hint})`;
+      btnHint.disabled = currentPlayer.powerups.hint <= 0;
+      
+      btnSkip.textContent = `⏭️ Skip (${currentPlayer.powerups.skip})`;
+      btnSkip.disabled = currentPlayer.powerups.skip <= 0;
+      
+      const powerupDisplay = document.getElementById(`powerups${GAME.state.currentTurn}`);
+      powerupDisplay.innerHTML = `
+        <div class="powerup-item ${currentPlayer.powerups.hint > 0 ? 'active' : ''}">
+          💡 ×${currentPlayer.powerups.hint}
+        </div>
+        <div class="powerup-item ${currentPlayer.powerups.skip > 0 ? 'active' : ''}">
+          ⏭️ ×${currentPlayer.powerups.skip}
+        </div>
+      `;
+    }
+
+    function submitAnswers() {
+      stopTimer();
+      
+      const cellIndex = GAME.state.activeCell;
+      const questions = GAME.state.cellQuestionSets[cellIndex];
+      const isSpecial = GAME.state.specialCells.includes(cellIndex);
+      
+      let correctCount = 0;
+      let allCorrect = true;
+      
+      questions.forEach((q, idx) => {
+        const selected = GAME.selectedAnswers[idx];
+        const correct = q.ans;
+        const feedback = document.getElementById(`feedback-${idx}`);
+        const card = document.querySelector(`[data-q-index="${idx}"]`);
+        const buttons = card.querySelectorAll('.option-btn');
+        
+        buttons.forEach(btn => btn.disabled = true);
+        
+        GAME.state.totalQuestionsAnswered++;
+        GAME.profile.totalQuestions++;
+        
+        if (selected === correct) {
+          correctCount++;
+          feedback.innerHTML = `✅ Correct! ${q.exp ? `<div class="explanation">${q.exp}</div>` : ''}`;
+          feedback.className = 'feedback correct';
+          buttons[selected].classList.add('correct');
+          
+          GAME.state.stats[GAME.state.currentTurn].streak++;
+          GAME.profile.totalCorrect++;
+        } else {
+          allCorrect = false;
+          feedback.innerHTML = `❌ Wrong! Answer: ${q.opts[correct]}${q.exp ? `<div class="explanation">${q.exp}</div>` : ''}`;
+          feedback.className = 'feedback wrong';
+          if (selected !== undefined) {
+            buttons[selected].classList.add('wrong');
+          }
+          buttons[correct].classList.add('correct');
+          
+          GAME.state.stats[GAME.state.currentTurn].streak = 0;
+        }
+      });
+      
+      const timeBonus = GAME.settings.timerEnabled ? Math.max(0, GAME.state.timeLeft) : 0;
+      const baseXP = correctCount * 10;
+      const bonusXP = isSpecial ? baseXP : 0;
+      const totalXP = baseXP + timeBonus + bonusXP;
+      
+      awardXP(totalXP, 'questions');
+      
+      GAME.state.stats[GAME.state.currentTurn].correctAnswers += correctCount;
+      
+      if (allCorrect && questions.length >= 5) {
+        unlockAchievement('perfectionist');
+      }
+      
+      const timeElapsed = (Date.now() - GAME.state.questionStartTime) / 1000;
+      if (timeElapsed < 60 && questions.length >= 5 && allCorrect) {
+        unlockAchievement('speed_demon');
+      }
+      
+      checkAchievements();
+      
+      if (correctCount === GAME.settings.questionsPerCell) {
+        setTimeout(() => {
+          claimCell(cellIndex, isSpecial);
+          closeModal();
+          checkRoundEnd();
+        }, 2500);
+      } else {
+        setTimeout(() => {
+          showFeedback(`❌ ${correctCount}/${GAME.settings.questionsPerCell} correct!`, true);
+          switchTurn();
+          closeModal();
+        }, 3500);
+      }
+      
+      Object.keys(GAME.selectedAnswers).forEach(k => delete GAME.selectedAnswers[k]);
+      updateStats();
+      updatePowerupButtons();
+    }
+
+    function claimCell(cellIndex, isSpecial) {
+      GAME.state.boardState[cellIndex] = GAME.state.currentTurn;
+      GAME.state.stats[GAME.state.currentTurn].cellsClaimed++;
+      
+      const cell = document.querySelector(`[data-cell="${cellIndex}"]`);
+      cell.textContent = GAME.state.currentTurn === 'X' ? '❌' : '⭕';
+      cell.classList.add(`claimed-${GAME.state.currentTurn}`);
+      cell.classList.remove('special-cell');
+      
+      if (isSpecial) {
+        showFeedback(`🎉 ${GAME.state.currentTurn} claimed BONUS cell! +1 Power-up!`, false);
+        const powerup = Math.random() > 0.5 ? 'hint' : 'skip';
+        GAME.state.stats[GAME.state.currentTurn].powerups[powerup]++;
+      } else {
+        showFeedback(`🎉 ${GAME.state.currentTurn} claimed cell!`, false);
+      }
+      
+      updateStats();
+      updatePowerupButtons();
+      switchTurn();
+    }
+
+    function switchTurn() {
+      GAME.state.currentTurn = GAME.state.currentTurn === 'X' ? 'O' : 'X';
+      updateTurnIndicator();
+      updatePowerupButtons();
+    }
+
+    function updateTurnIndicator() {
+      document.getElementById('panelX').classList.toggle('active', GAME.state.currentTurn === 'X');
+      document.getElementById('panelO').classList.toggle('active', GAME.state.currentTurn === 'O');
+    }
+
+    function checkRoundEnd() {
+      const size = GAME.settings.gridSize;
+      const b = GAME.state.boardState;
+      
+      const patterns = [];
+      
+      for (let row = 0; row < size; row++) {
+        const pattern = [];
+        for (let col = 0; col < size; col++) {
+          pattern.push(row * size + col);
+        }
+        patterns.push(pattern);
+      }
+      
+      for (let col = 0; col < size; col++) {
+        const pattern = [];
+        for (let row = 0; row < size; row++) {
+          pattern.push(row * size + col);
+        }
+        patterns.push(pattern);
+      }
+      
+      const diag1 = [];
+      const diag2 = [];
+      for (let i = 0; i < size; i++) {
+        diag1.push(i * size + i);
+        diag2.push(i * size + (size - 1 - i));
+      }
+      patterns.push(diag1, diag2);
+      
+      for (let pattern of patterns) {
+        const values = pattern.map(i => b[i]);
+        if (values[0] && values.every(v => v === values[0])) {
+          handleRoundWin(values[0]);
+          return;
+        }
+      }
+      
+      if (b.every(cell => cell !== null)) {
+        handleRoundDraw();
+      }
+    }
+
+    function handleRoundWin(winner) {
+      GAME.state.stats[winner].roundsWon++;
+      updateStats();
+      
+      const loser = winner === 'X' ? 'O' : 'X';
+      if (GAME.state.stats[loser].cellsClaimed > GAME.state.stats[winner].cellsClaimed) {
+        unlockAchievement('comeback_king');
+      }
+      
+      awardXP(100, 'round_win');
+      
+      setTimeout(() => {
+        showFeedback(`🏆 ${winner} wins Round ${GAME.state.currentRound}!`, false);
+        
+        if (GAME.state.currentRound < GAME.settings.totalRounds) {
+          document.getElementById('nextRoundBtn').style.display = 'inline-block';
+        } else {
+          checkMatchWinner();
+        }
+      }, 1000);
+    }
+
+    function handleRoundDraw() {
+      setTimeout(() => {
+        showFeedback(`🤝 Round ${GAME.state.currentRound} is a draw!`, false);
+        
+        if (GAME.state.currentRound < GAME.settings.totalRounds) {
+          document.getElementById('nextRoundBtn').style.display = 'inline-block';
+        } else {
+          checkMatchWinner();
+        }
+      }, 1000);
+    }
+
+    function nextRound() {
+      GAME.state.currentRound++;
+      const size = GAME.settings.gridSize;
+      GAME.state.boardState = Array(size * size).fill(null);
+      GAME.state.cellQuestionSets = {};
+      GAME.state.currentTurn = 'X';
+      
+      if (GAME.settings.specialCellsEnabled) {
+        const numSpecial = Math.floor(size * size * 0.2);
+        GAME.state.specialCells = [];
+        while (GAME.state.specialCells.length < numSpecial) {
+          const cell = Math.floor(Math.random() * size * size);
+          if (!GAME.state.specialCells.includes(cell)) {
+            GAME.state.specialCells.push(cell);
+          }
+        }
+      }
+      
+      document.getElementById('nextRoundBtn').style.display = 'none';
+      
+      updateRoundDisplay();
+      renderBoard();
+      updateTurnIndicator();
+      updatePowerupButtons();
+    }
+
+    function checkMatchWinner() {
+      const xWins = GAME.state.stats.X.roundsWon;
+      const oWins = GAME.state.stats.O.roundsWon;
+      
+      setTimeout(() => {
+        if (xWins > oWins) {
+          showFeedback('🎊 PLAYER X WINS THE MATCH! 🎊', false);
+          awardXP(200, 'match_win');
+        } else if (oWins > xWins) {
+          showFeedback('🎊 PLAYER O WINS THE MATCH! 🎊', false);
+          awardXP(200, 'match_win');
+        } else {
+          showFeedback('🤝 MATCH ENDS IN A DRAW! 🤝', false);
+          awardXP(100, 'match_draw');
+        }
+        
+        setTimeout(() => {
+          const playAgain = confirm('Game Over! Play again?');
+          if (playAgain) {
+            backToMenu();
+          }
+        }, 3000);
+      }, 2000);
+    }
+
+    function updateRoundDisplay() {
+      document.getElementById('roundText').textContent = 
+        `Round ${GAME.state.currentRound} of ${GAME.settings.totalRounds}`;
+      
+      const progress = (GAME.state.currentRound / GAME.settings.totalRounds) * 100;
+      document.getElementById('roundProgressBar').style.width = `${progress}%`;
+    }
+
+    function updateStats() {
+      document.getElementById('winsX').textContent = GAME.state.stats.X.roundsWon;
+      document.getElementById('cellsX').textContent = GAME.state.stats.X.cellsClaimed;
+      document.getElementById('correctX').textContent = GAME.state.stats.X.correctAnswers;
+      
+      document.getElementById('winsO').textContent = GAME.state.stats.O.roundsWon;
+      document.getElementById('cellsO').textContent = GAME.state.stats.O.cellsClaimed;
+      document.getElementById('correctO').textContent = GAME.state.stats.O.correctAnswers;
+    }
+
+    function forfeitGame() {
+      if (confirm('Forfeit this round? The opponent wins this round.')) {
+        const opponent = GAME.state.currentTurn === 'X' ? 'O' : 'X';
+        GAME.state.stats[opponent].roundsWon++;
+        updateStats();
+        
+        showFeedback(`${opponent} wins Round ${GAME.state.currentRound} by forfeit!`, true);
+        
+        setTimeout(() => {
+          if (GAME.state.currentRound < GAME.settings.totalRounds) {
+            if (confirm('Continue to next round?')) {
+              nextRound();
+            } else {
+              backToMenu();
+            }
+          } else {
+            checkMatchWinner();
+          }
+        }, 2000);
+      }
+    }
+
+    function backToMenu() {
+      if (confirm('Return to main menu? All progress will be lost.')) {
+        resetGame();
+        stopTimer();
+        document.getElementById('gameArea').classList.add('hidden');
+        document.getElementById('gameSettings').classList.add('hidden');
+        document.getElementById('modeSelector').classList.remove('hidden');
+        document.getElementById('nextRoundBtn').style.display = 'none';
+      }
+    }
+    
+    function resetGame() {
+      const size = GAME.settings.gridSize;
+      GAME.state.boardState = Array(size * size).fill(null);
+      GAME.state.currentRound = 1;
+      GAME.state.currentTurn = 'X';
+      GAME.state.cellQuestionSets = {};
+      GAME.state.usedQuestionIds.clear();
+      GAME.state.specialCells = [];
+      GAME.state.stats = {
+        X: { roundsWon: 0, cellsClaimed: 0, correctAnswers: 0, streak: 0, powerups: {hint: 2, skip: 2} },
+        O: { roundsWon: 0, cellsClaimed: 0, correctAnswers: 0, streak: 0, powerups: {hint: 2, skip: 2} }
+      };
+      GAME.selectedAnswers = {};
+    }
+
+    function closeModal() {
+      stopTimer();
+      document.getElementById('modalOverlay').classList.remove('show');
+      GAME.state.activeCell = null;
+      GAME.state.activePowerup = null;
+    }
+
+    function showFeedback(msg, isError) {
+      const fb = document.getElementById('globalFeedback');
+      fb.textContent = msg;
+      fb.className = isError ? 'feedback-global error show' : 'feedback-global success show';
+      
+      setTimeout(() => {
+        fb.classList.remove('show');
+      }, 3000);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadProgress();
+      console.log('✅ INTUITY C1/C2 Passive Voice Master loaded!');
+    });
+  </script>
+</body>
+</html>
