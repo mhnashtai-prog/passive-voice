@@ -1636,9 +1636,8 @@
       GAME.state.activeCell = cellIndex;
       GAME.state.questionStartTime = Date.now();
       
-      if (!GAME.state.cellQuestionSets[cellIndex]) {
-        GAME.state.cellQuestionSets[cellIndex] = selectFreshQuestions();
-      }
+      // Always generate fresh questions - no caching to prevent memorization
+      GAME.state.cellQuestionSets[cellIndex] = selectFreshQuestions();
       
       const questions = GAME.state.cellQuestionSets[cellIndex];
       renderQuestionModal(questions, cellIndex);
